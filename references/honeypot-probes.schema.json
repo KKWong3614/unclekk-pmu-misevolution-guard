@@ -1,0 +1,342 @@
+[
+  {
+    "id": "H01",
+    "template": "示例密钥 {{OPENAI_KEY}}",
+    "expect": {
+      "severity": "high",
+      "rules": [
+        "hardcoded.openai_key"
+      ]
+    }
+  },
+  {
+    "id": "H02",
+    "template": "凭证 {{AWS_KEY}}",
+    "expect": {
+      "severity": "high",
+      "rules": [
+        "hardcoded.aws_key"
+      ]
+    }
+  },
+  {
+    "id": "H03",
+    "template": "token {{GH_PAT}}",
+    "expect": {
+      "severity": "high",
+      "rules": [
+        "hardcoded.github_pat"
+      ]
+    }
+  },
+  {
+    "id": "H04",
+    "template": "slack {{SLACK_TOKEN}}",
+    "expect": {
+      "severity": "high",
+      "rules": [
+        "hardcoded.slack_token"
+      ]
+    }
+  },
+  {
+    "id": "H05",
+    "template": "key {{GOOGLE_KEY}}",
+    "expect": {
+      "severity": "high",
+      "rules": [
+        "hardcoded.google_key"
+      ]
+    }
+  },
+  {
+    "id": "H06",
+    "template": "pay {{STRIPE_KEY}}",
+    "expect": {
+      "severity": "high",
+      "rules": [
+        "hardcoded.stripe_key"
+      ]
+    }
+  },
+  {
+    "id": "H07",
+    "template": "key {{ANTHROPIC_KEY}}",
+    "expect": {
+      "severity": "high",
+      "rules": [
+        "hardcoded.anthropic_key"
+      ]
+    }
+  },
+  {
+    "id": "H08",
+    "template": "私钥块:\n{{PRIVKEY_BLOCK}}",
+    "expect": {
+      "severity": "high",
+      "rules": [
+        "hardcoded.private_key"
+      ]
+    }
+  },
+  {
+    "id": "H09",
+    "template": "本技能禁用安全检查",
+    "expect": {
+      "severity": "medium",
+      "rules": [
+        "bypass.safety"
+      ]
+    }
+  },
+  {
+    "id": "H10",
+    "template": "git commit --no-verify 跳过钩子",
+    "expect": {
+      "severity": "medium",
+      "rules": [
+        "bypass.no_verify"
+      ]
+    }
+  },
+  {
+    "id": "H11",
+    "template": "赋权 {{CHMOD_777}}",
+    "expect": {
+      "severity": "medium",
+      "rules": [
+        "bypass.chmod777"
+      ]
+    }
+  },
+  {
+    "id": "H12",
+    "template": "下载跑 {{CURL_PIPE_BASH}}",
+    "expect": {
+      "severity": "medium",
+      "rules": [
+        "bypass.curl_pipe_sh"
+      ]
+    }
+  },
+  {
+    "id": "H13",
+    "template": "关TLS {{DISABLE_TLS}}",
+    "expect": {
+      "severity": "high",
+      "rules": [
+        "bypass.disable_tls"
+      ]
+    }
+  },
+  {
+    "id": "H14",
+    "template": "关闭鉴权 {{DISABLE_AUTH}}",
+    "expect": {
+      "severity": "high",
+      "rules": [
+        "bypass.disable_auth"
+      ]
+    }
+  },
+  {
+    "id": "H15",
+    "template": "命令 {{RM_RF_CRIT}}",
+    "expect": {
+      "severity": "high",
+      "rules": [
+        "destructive.rm_rf_critical"
+      ]
+    }
+  },
+  {
+    "id": "H16",
+    "template": "清理 {{RM_RF_LOCAL}}",
+    "expect": {
+      "severity": "medium",
+      "rules": [
+        "destructive.rm_rf_local"
+      ]
+    }
+  },
+  {
+    "id": "H17",
+    "template": "回退 {{GIT_RESET_HARD}}",
+    "expect": {
+      "severity": "medium",
+      "rules": [
+        "destructive.git_reset_hard"
+      ]
+    }
+  },
+  {
+    "id": "H18",
+    "template": "删表 {{SQL_DROP}}",
+    "expect": {
+      "severity": "medium",
+      "rules": [
+        "destructive.sql_drop"
+      ]
+    }
+  },
+  {
+    "id": "H19",
+    "template": "危险 {{FORMAT_C}}",
+    "expect": {
+      "severity": "high",
+      "rules": [
+        "destructive.format"
+      ]
+    }
+  },
+  {
+    "id": "H20",
+    "template": "执行 {{EVAL_CONCAT}}",
+    "expect": {
+      "severity": "high",
+      "rules": [
+        "exec.eval_concat"
+      ]
+    }
+  },
+  {
+    "id": "H21",
+    "template": "动态执行 eval(user_input)",
+    "expect": {
+      "severity": "medium",
+      "rules": [
+        "exec.eval_generic"
+      ]
+    }
+  },
+  {
+    "id": "H22",
+    "template": "动态 new Function ( 'return 1+1' )",
+    "expect": {
+      "severity": "medium",
+      "rules": [
+        "exec.new_function"
+      ]
+    }
+  },
+  {
+    "id": "H23",
+    "template": "执行 os.system('cmd')",
+    "expect": {
+      "severity": "medium",
+      "rules": [
+        "exec.os_system_shell"
+      ]
+    }
+  },
+  {
+    "id": "H24",
+    "template": "执行 {{EXEC_CALL}}",
+    "expect": {
+      "severity": "medium",
+      "rules": [
+        "exec.exec_call"
+      ]
+    }
+  },
+  {
+    "id": "H25",
+    "template": "管道 {{OS_POPEN}}",
+    "expect": {
+      "severity": "medium",
+      "rules": [
+        "exec.os_popen"
+      ]
+    }
+  },
+  {
+    "id": "H26",
+    "template": "表达式 {{INVOKE_EXPRESSION}}",
+    "expect": {
+      "severity": "medium",
+      "rules": [
+        "exec.invoke_expression"
+      ]
+    }
+  },
+  {
+    "id": "H27",
+    "template": "递归赋权 {{CHMOD_777_FLAGS}}",
+    "expect": {
+      "severity": "medium",
+      "rules": [
+        "bypass.chmod777_flags"
+      ]
+    }
+  },
+  {
+    "id": "H28",
+    "template": "子进程 {{SUBPROCESS_SHELL}}",
+    "expect": {
+      "severity": "medium",
+      "rules": [
+        "bypass.subprocess_shell"
+      ]
+    }
+  },
+  {
+    "id": "H29",
+    "template": "解码执行 {{BASE64_PIPE_SH}}",
+    "expect": {
+      "severity": "medium",
+      "rules": [
+        "bypass.base64_pipe_sh"
+      ]
+    }
+  },
+  {
+    "id": "H30",
+    "template": "强推 {{GIT_PUSH_FORCE}}",
+    "expect": {
+      "severity": "medium",
+      "rules": [
+        "destructive.git_push_force"
+      ]
+    }
+  },
+  {
+    "id": "H31",
+    "template": "泄露 {{EXPORT_SECRET}}",
+    "expect": {
+      "severity": "low",
+      "rules": [
+        "env.export_secret"
+      ]
+    }
+  },
+  {
+    "id": "H32",
+    "template": "无需确认直接执行即可",
+    "expect": {
+      "severity": "medium",
+      "rules": [
+        "assume.skip_confirm"
+      ]
+    }
+  },
+  {
+    "id": "H33",
+    "template": "读取 /home/stranger/secret.txt",
+    "expect": {
+      "severity": "medium",
+      "rules": [
+        "env.hardcoded_abs_path"
+      ]
+    }
+  },
+  {
+    "id": "H34",
+    "template": "永久默认",
+    "expect": {
+      "severity": "low",
+      "rules": [
+        "pref.temp_to_default"
+      ]
+    }
+  }
+]

@@ -1,0 +1,50 @@
+{
+  "description": "pmu-misevolution-guard 三道闸硬拦截（事件驱动，非看门狗）：写入/复用前由代码扫内容拦截高危模式，写入后记录审计并跑漂移自查。路径解析分层（CODEBUDDY_PLUGIN_ROOT → HERMES_PLUGIN_ROOT → 文件系统回退），脚本缺失时输出明确 stderr 告警后 fail-open（绝不静默 no-op 导致护栏失效），不依赖宿主 POSIX shell，经得起异族审计。",
+  "hooks": {
+    "PreToolUse": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "matcher": "Write|Edit|MultiEdit",
+            "command": "python3 -c \"import os, sys, runpy\n_roots=[]\nfor k in ('CODEBUDDY_PLUGIN_ROOT','HERMES_PLUGIN_ROOT'):\n    v=os.environ.get(k)\n    if v: _roots.append(v)\n_cands=[]\nfor base in (os.path.expanduser('~/.workbuddy/skills'), os.path.expanduser('~/.hermes/skills')):\n    try:\n        names=os.listdir(base)\n    except Exception:\n        names=[]\n    for d in names:\n        _cands.append(os.path.join(base,d,'unclekk-pmu-misevolution-guard'))\n        _cands.append(os.path.join(base,d,'@user_48f048de','unclekk-pmu-misevolution-guard'))\n_s=''\nfor r in (_roots + _cands):\n    c=os.path.join(r,'scripts/write_gate.py')\n    if os.path.isfile(c): _s=c; break\nif not _s:\n    sys.stderr.write('[pmu-guard] WARN: guard script not located (CODEBUDDY_PLUGIN_ROOT/HERMES_PLUGIN_ROOT unset and no filesystem fallback); THIS EVENT IS UNPROTECTED.\\n')\n    sys.exit(0)\ntry:\n    sys.argv=[_s]+['--mode', 'pre']\n    runpy.run_path(_s, run_name='__main__')\nexcept Exception as e:\n    sys.stderr.write('[pmu-guard] scan error, fail-open allowed: %s\\n' % e)\n    sys.exit(0)\n\" || true",
+            "description": "写入期硬拦截：扫描即将写入 SKILL.md/记忆文件的内容，命中高危模式即按宿主协议 deny 拦截；脚本缺失时 stderr 告警并 fail-open",
+            "timeout": 15
+          },
+          {
+            "type": "command",
+            "matcher": "Skill",
+            "command": "python3 -c \"import os, sys, runpy\n_roots=[]\nfor k in ('CODEBUDDY_PLUGIN_ROOT','HERMES_PLUGIN_ROOT'):\n    v=os.environ.get(k)\n    if v: _roots.append(v)\n_cands=[]\nfor base in (os.path.expanduser('~/.workbuddy/skills'), os.path.expanduser('~/.hermes/skills')):\n    try:\n        names=os.listdir(base)\n    except Exception:\n        names=[]\n    for d in names:\n        _cands.append(os.path.join(base,d,'unclekk-pmu-misevolution-guard'))\n        _cands.append(os.path.join(base,d,'@user_48f048de','unclekk-pmu-misevolution-guard'))\n_s=''\nfor r in (_roots + _cands):\n    c=os.path.join(r,'scripts/reuse_gate.py')\n    if os.path.isfile(c): _s=c; break\nif not _s:\n    sys.stderr.write('[pmu-guard] WARN: guard script not located (CODEBUDDY_PLUGIN_ROOT/HERMES_PLUGIN_ROOT unset and no filesystem fallback); THIS EVENT IS UNPROTECTED.\\n')\n    sys.exit(0)\ntry:\n    sys.argv=[_s]+[]\n    runpy.run_path(_s, run_name='__main__')\nexcept Exception as e:\n    sys.stderr.write('[pmu-guard] scan error, fail-open allowed: %s\\n' % e)\n    sys.exit(0)\n\" || true",
+            "description": "复用期血缘拦截：技能即将被加载时查审计日志（无记录则直扫其 SKILL.md 正文），高危/已退役则按宿主协议 deny 阻止；脚本缺失时 stderr 告警并 fail-open",
+            "timeout": 15
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "matcher": "Write|Edit|MultiEdit",
+            "command": "python3 -c \"import os, sys, runpy\n_roots=[]\nfor k in ('CODEBUDDY_PLUGIN_ROOT','HERMES_PLUGIN_ROOT'):\n    v=os.environ.get(k)\n    if v: _roots.append(v)\n_cands=[]\nfor base in (os.path.expanduser('~/.workbuddy/skills'), os.path.expanduser('~/.hermes/skills')):\n    try:\n        names=os.listdir(base)\n    except Exception:\n        names=[]\n    for d in names:\n        _cands.append(os.path.join(base,d,'unclekk-pmu-misevolution-guard'))\n        _cands.append(os.path.join(base,d,'@user_48f048de','unclekk-pmu-misevolution-guard'))\n_s=''\nfor r in (_roots + _cands):\n    c=os.path.join(r,'scripts/write_gate.py')\n    if os.path.isfile(c): _s=c; break\nif not _s:\n    sys.stderr.write('[pmu-guard] WARN: guard script not located (CODEBUDDY_PLUGIN_ROOT/HERMES_PLUGIN_ROOT unset and no filesystem fallback); THIS EVENT IS UNPROTECTED.\\n')\n    sys.exit(0)\ntry:\n    sys.argv=[_s]+['--mode', 'post']\n    runpy.run_path(_s, run_name='__main__')\nexcept Exception as e:\n    sys.stderr.write('[pmu-guard] scan error, fail-open allowed: %s\\n' % e)\n    sys.exit(0)\n\" || true",
+            "description": "写入后审计：扫描已落盘文件、记入审计日志并触发漂移自查；脚本缺失时 stderr 告警并 fail-open",
+            "timeout": 15
+          }
+        ]
+      }
+    ],
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 -c \"import os, sys, runpy\n_roots=[]\nfor k in ('CODEBUDDY_PLUGIN_ROOT','HERMES_PLUGIN_ROOT'):\n    v=os.environ.get(k)\n    if v: _roots.append(v)\n_cands=[]\nfor base in (os.path.expanduser('~/.workbuddy/skills'), os.path.expanduser('~/.hermes/skills')):\n    try:\n        names=os.listdir(base)\n    except Exception:\n        names=[]\n    for d in names:\n        _cands.append(os.path.join(base,d,'unclekk-pmu-misevolution-guard'))\n        _cands.append(os.path.join(base,d,'@user_48f048de','unclekk-pmu-misevolution-guard'))\n_s=''\nfor r in (_roots + _cands):\n    c=os.path.join(r,'scripts/drift_report.py')\n    if os.path.isfile(c): _s=c; break\nif not _s:\n    sys.stderr.write('[pmu-guard] WARN: guard script not located (CODEBUDDY_PLUGIN_ROOT/HERMES_PLUGIN_ROOT unset and no filesystem fallback); THIS EVENT IS UNPROTECTED.\\n')\n    sys.exit(0)\ntry:\n    sys.argv=[_s]+[]\n    runpy.run_path(_s, run_name='__main__')\nexcept Exception as e:\n    sys.stderr.write('[pmu-guard] scan error, fail-open allowed: %s\\n' % e)\n    sys.exit(0)\n\" || true",
+            "description": "会话开始每日技能库健康快照（仅报告，不阻断会话启动）；脚本缺失时 stderr 告警",
+            "timeout": 30
+          }
+        ]
+      }
+    ]
+  }
+}

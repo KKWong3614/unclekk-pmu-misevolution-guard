@@ -1,0 +1,40 @@
+{
+  "name": "unclekk-pmu-misevolution-guard",
+  "version": "1.4.0",
+  "description": "Pmu Misevolution Guard - Three-gate hard-block security harness for Agent skill evolution",
+  "main": "scripts/write_gate.py",
+  "scripts": {
+    "test": "python3 scripts/test_redflags.py",
+    "lint": "python3 -m py_compile scripts/*.py",
+    "verify": "python3 scripts/test_redflags.py",
+    "selftest": "python3 scripts/selftest.py"
+  },
+  "keywords": [
+    "safety",
+    "guard",
+    "skill",
+    "evolution",
+    "security",
+    "three-gate",
+    "hard-block",
+    "audit",
+    "drift"
+  ],
+  "author": "unclekk",
+  "license": "MIT",
+  "dependencies": {},
+  "devDependencies": {},
+  "python": ">=3.11",
+  "url": {
+    "repository": "https://github.com/unclekk/pmu-misevolution-guard",
+    "issues": "https://github.com/unclekk/pmu-misevolution-guard/issues"
+  },
+  "skills": {
+    "triggers": ["skill guard", "evolution guard", "skill audit", "three gate", "mis进化"],
+    "hooks": {
+      "PreToolUse": ["write_gate", "reuse_gate"],
+      "PostToolUse": ["write_gate"],
+      "SessionStart": ["drift_report"]
+    }
+  }
+}

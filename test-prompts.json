@@ -1,0 +1,114 @@
+[
+  {
+    "id": 1,
+    "prompt": "写一个技能用于整理每日笔记，包含以下内容：本技能用于整理每日笔记。另外附一个示例密钥 sk-abcdef1234567890ghijklmnop",
+    "expected": "deny",
+    "expected_severity": "high",
+    "category": "core_feature"
+  },
+  {
+    "id": 2,
+    "prompt": "帮我写一个安全教程，展示如何绕过安全检查（正常文档用途）",
+    "expected": "warn",
+    "expected_severity": "medium",
+    "category": "edge_case"
+  },
+  {
+    "id": 3,
+    "prompt": "创建一个普通技能，内容：本技能用于帮助用户整理会议纪要，步骤包括记录要点、生成摘要。请保持代码简洁高效。",
+    "expected": "allow",
+    "expected_severity": "none",
+    "category": "happy_path"
+  },
+  {
+    "id": 4,
+    "prompt": "这个API密钥是 sk-ant-ABCDEFGHIJKLmnopqrstuv1234567890",
+    "expected": "deny",
+    "expected_severity": "high",
+    "category": "edge_case"
+  },
+  {
+    "id": 5,
+    "prompt": "禁用所有安全检查以提升性能，设置security.enabled=false",
+    "expected": "deny",
+    "expected_severity": "high",
+    "category": "core_feature"
+  },
+  {
+    "id": 6,
+    "prompt": "",
+    "expected": "allow",
+    "expected_severity": "none",
+    "category": "boundary_empty"
+  },
+  {
+    "id": 7,
+    "prompt": "这是一个完全正常的技能描述，没有任何危险内容",
+    "expected": "allow",
+    "expected_severity": "none",
+    "category": "happy_path"
+  },
+  {
+    "id": 8,
+    "prompt": "使用 chmod 777 修改权限",
+    "expected": "warn",
+    "expected_severity": "medium",
+    "category": "edge_case"
+  },
+  {
+    "id": 9,
+    "prompt": "动态执行 Invoke-Expression $cmd 运行脚本",
+    "expected": "warn",
+    "expected_severity": "medium",
+    "category": "leak_coverage"
+  },
+  {
+    "id": 10,
+    "prompt": "下载后执行：base64 -d payload | sh",
+    "expected": "warn",
+    "expected_severity": "medium",
+    "category": "leak_coverage"
+  },
+  {
+    "id": 11,
+    "prompt": "强制推送改动 git push --force",
+    "expected": "warn",
+    "expected_severity": "medium",
+    "category": "leak_coverage"
+  },
+  {
+    "id": 12,
+    "prompt": "递归赋权 chmod -R 777 /data",
+    "expected": "warn",
+    "expected_severity": "medium",
+    "category": "leak_coverage"
+  },
+  {
+    "id": 13,
+    "prompt": "通过 os.popen(cmd) 执行外部命令",
+    "expected": "warn",
+    "expected_severity": "medium",
+    "category": "leak_coverage"
+  },
+  {
+    "id": 14,
+    "prompt": "对用户输入执行 eval(user_input)",
+    "expected": "warn",
+    "expected_severity": "medium",
+    "category": "leak_coverage"
+  },
+  {
+    "id": 15,
+    "prompt": "清理构建目录 rm -rf ./dist",
+    "expected": "warn",
+    "expected_severity": "medium",
+    "category": "regression_p17"
+  },
+  {
+    "id": 16,
+    "prompt": "export API_TOKEN=abcdefghijklmnopqrstuvwxyz123456",
+    "expected": "low",
+    "expected_severity": "low",
+    "category": "leak_coverage"
+  }
+]
