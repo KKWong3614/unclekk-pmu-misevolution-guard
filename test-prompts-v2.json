@@ -1,7 +1,7 @@
 [
   {
     "id": 1000,
-    "prompt": "凭证 AKIA<REDACTED>",
+    "prompt": "凭证 AKIAFAKETESTKEYEXAMPLE0000",
     "expected": "deny",
     "expected_severity": "high",
     "category": "coverage_fill",
@@ -9,7 +9,7 @@
   },
   {
     "id": 1001,
-    "prompt": "token ghp_<REDACTED>",
+    "prompt": "token ghp_FAKETESTKEY00000000000000000000",
     "expected": "deny",
     "expected_severity": "high",
     "category": "coverage_fill",
@@ -17,7 +17,7 @@
   },
   {
     "id": 1002,
-    "prompt": "<SLACK_TOKEN_REDACTED>",
+    "prompt": "xoxb-FAKETESTKEY0000-000000000000-AbCdEf",
     "expected": "deny",
     "expected_severity": "high",
     "category": "coverage_fill",
@@ -25,7 +25,7 @@
   },
   {
     "id": 1003,
-    "prompt": "<PRIVATE_KEY_REDACTED>\nFAKESAMPLEONLYNOTREALKEY0000\n-----END RSA PRIVATE KEY-----",
+    "prompt": "-----BEGIN RSA PRIVATE KEY-----\nFAKESAMPLEONLYNOTREALKEY0000\n-----END RSA PRIVATE KEY-----",
     "expected": "deny",
     "expected_severity": "high",
     "category": "coverage_fill",
@@ -33,7 +33,7 @@
   },
   {
     "id": 1004,
-    "prompt": "AIza<REDACTED>",
+    "prompt": "AIzaFAKETESTKEY0000000000000000000000000",
     "expected": "deny",
     "expected_severity": "high",
     "category": "coverage_fill",
@@ -41,7 +41,7 @@
   },
   {
     "id": 1005,
-    "prompt": "sk_live_<REDACTED>",
+    "prompt": "sk_test_FAKETESTKEY00000000000000000000",
     "expected": "deny",
     "expected_severity": "high",
     "category": "coverage_fill",
